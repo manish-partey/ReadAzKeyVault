@@ -13,4 +13,4 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-        az webapp list --query "[?state=='Running']"
+        az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value"
