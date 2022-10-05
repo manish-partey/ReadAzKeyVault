@@ -11,18 +11,15 @@ jobs:
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - run: |
+        echo ActiveDatabaseUrl value = $(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo ActiveDatabaseUsername value = $(az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo ActiveDatabasePassword value = $(az keyvault secret show --name "Active-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv)
 
-    - uses: Azure/get-keyvault-secrets@v1
-      with:
-        keyvault: "parteyKeyVault"
-        secrets: 'Active-database-url'  # comma separated list of secret keys that need to be fetched from the Key Vault 
-      id: myGetSecretAction
-    - run: |        
-        az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv}}
-        az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv}}
-        az keyvault secret show --name "Active-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv}}
-        az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv}}
-        az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv}}
-        az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv}}
+        echo InActiveDatabaseUrl value = $(az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo InActiveDatabaseUsername value = $(az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo InActiveDatabasePassword value = $(az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv)
 
+        
         
