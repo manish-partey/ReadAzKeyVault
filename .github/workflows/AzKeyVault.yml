@@ -12,7 +12,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}  
     - run: |
-        $testVar=$(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        testVar=$(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
         echo "::set-output name=h::$testVar"
         echo ActiveDatabaseUrl value = $(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
         echo ActiveDatabaseUsername value = $(az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv)
