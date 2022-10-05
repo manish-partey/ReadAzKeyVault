@@ -13,13 +13,13 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-        az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
-        az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv
-        az keyvault secret show --name "Active-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv
+      echo az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
+      echo az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv
+      echo az keyvault secret show --name "Active-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv
 
-        az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
-        az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv
-        az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv
+      echo az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
+      echo az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv
+      echo az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv
 
         echo ActiveDatabaseUrl $ActiveDatabaseUrl ActiveDatabaseUsername $ActiveDatabaseUsername ActiveDatabasePassword $ActiveDatabasePassword
         echo InActiveDatabaseUrl $InActiveDatabaseUrl InActiveDatabaseUsername $InActiveDatabaseUsername InActiveDatabasePassword $InActiveDatabasePassword
