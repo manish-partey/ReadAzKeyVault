@@ -14,3 +14,4 @@ jobs:
     
     - run: |
         az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value"
+        echo hello world
