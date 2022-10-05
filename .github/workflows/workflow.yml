@@ -13,6 +13,7 @@ jobs:
         keyvault: "parteyKeyVault"
         secrets: 'Active-database-url'  # comma separated list of secret keys that need to be fetched from the Key Vault 
       id: myGetSecretAction
-
-        echo $steps.myGetSecretAction.outputs.Active-database-url
+      env:          
+          TF_VAR_MyFirstSecret: ${{ steps.myGetSecretAction.outputs.Active-database-url }}
+          
         
