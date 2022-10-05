@@ -32,7 +32,9 @@ jobs:
           echo "${{ steps.test1.outputs.ActiveDatabaseUsername }}"
           echo "${{ steps.test1.outputs.ActiveDatabasePassword }}"
           echo "${{ steps.test1.outputs.InActiveDatabaseUrl }}"
-          echo "${{ steps.test1.outputs.InActiveDatabaseUrl }}"
-          echo "${{ steps.test1.outputs.InActiveDatabaseUrl }}"
-        
-        
+          echo "${{ steps.test1.outputs.InActiveDatabaseUsername }}"
+          echo "${{ steps.test1.outputs.InActiveDatabaseUsername }}"
+    - name: Swapping KeyVault Secrets
+      run: |
+        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-url" --value "${{ steps.test1.outputs.InActiveDatabaseUrl }}"
+        az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
