@@ -11,7 +11,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}  
     - name: Reading KeyVault Secrets
-      id: test1
+      id: ReadKeyVault
       run: |
         ActiveDatabaseUrl=$(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
         ActiveDatabaseUsername=$(az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv)
@@ -30,23 +30,24 @@ jobs:
     - name: Printing KeyVault Secrets
       run: |
           echo Active Database Keys
-          echo "${{ steps.test1.outputs.ActiveDatabaseUrl }}"
-          echo "${{ steps.test1.outputs.ActiveDatabaseUsername }}"
-          echo "${{ steps.test1.outputs.ActiveDatabasePassword }}"
+          echo "${{ steps.ReadKeyVault.outputs.ActiveDatabaseUrl }}"
+          echo "${{ steps.ReadKeyVault.outputs.ActiveDatabaseUsername }}"
+          echo "${{ steps.ReadKeyVault.outputs.ActiveDatabasePassword }}"
 
           echo InActive Database Keys
-          echo "${{ steps.test1.outputs.InActiveDatabaseUrl }}"
-          echo "${{ steps.test1.outputs.InActiveDatabaseUsername }}"
-          echo "${{ steps.test1.outputs.InActiveDatabasePassword }}"
+          echo "${{ steps.ReadKeyVault.outputs.InActiveDatabaseUrl }}"
+          echo "${{ steps.ReadKeyVault.outputs.InActiveDatabaseUsername }}"
+          echo "${{ steps.ReadKeyVault.outputs.InActiveDatabasePassword }}"
 
     - name: Swapping KeyVault Secrets
       run: |
-        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-url" --value "${{ steps.test1.outputs.InActiveDatabaseUrl }}"
-        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-username" --value "${{ steps.test1.outputs.InActiveDatabaseUsername }}"
-        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-password" --value "${{ steps.test1.outputs.InActiveDatabasePassword }}"
-        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-url" --value "${{ steps.test1.outputs.ActiveDatabaseUrl }}"
-        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-username" --value "${{ steps.test1.outputs.ActiveDatabaseUsername }}"
-        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-password" --value "${{ steps.test1.outputs.ActiveDatabasePassword }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-url" --value "${{ steps.ReadKeyVault.outputs.InActiveDatabaseUrl }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-username" --value "${{ steps.ReadKeyVault.outputs.InActiveDatabaseUsername }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-password" --value "${{ steps.ReadKeyVault.outputs.InActiveDatabasePassword }}"
+
+        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-url" --value "${{ steps.ReadKeyVault.outputs.ActiveDatabaseUrl }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-username" --value "${{ steps.ReadKeyVault.outputs.ActiveDatabaseUsername }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-password" --value "${{ steps.ReadKeyVault.outputs.ActiveDatabasePassword }}"
 
     - name: Print KeyVault Secrets After Swapping Values
       run: |
