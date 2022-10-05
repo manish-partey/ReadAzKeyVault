@@ -15,6 +15,7 @@ jobs:
       id: myGetSecretAction      
       env:
         RUNNER_CONTEXT: ${{ steps.myGetSecretAction.outputs.Active-database-url }}
-      run: echo "$RUNNER_CONTEXT"
+      run: |
+        echo "$RUNNER_CONTEXT"
     
         
