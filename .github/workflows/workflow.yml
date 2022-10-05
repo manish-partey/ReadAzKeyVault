@@ -4,8 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # checkout the repo
-    - uses: actions/checkout@master
+      # checkout the repo    
     - uses: Azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }} 
@@ -14,4 +13,6 @@ jobs:
         keyvault: "parteyKeyVault"
         secrets: 'Active-database-url'  # comma separated list of secret keys that need to be fetched from the Key Vault 
       id: myGetSecretAction
+
+        echo ${{ steps.myGetSecretAction.outputs.Active-database-url }}
         
