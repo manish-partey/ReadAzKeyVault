@@ -13,5 +13,13 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-        az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value"
-        echo hello world
+        ActiveDatabaseUrl = $(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value")
+        ActiveDatabaseUsername = $(az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value")
+        ActiveDatabasePassword = $(az keyvault secret show --name "Active-database-password" --vault-name "parteyKeyVault" --query "value")
+
+        InActiveDatabaseUrl = $(az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value")
+        InActiveDatabaseUsername = $(az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value")
+        InActiveDatabasePassword = $(az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value")
+
+        echo ActiveDatabaseUrl $ActiveDatabaseUrl ActiveDatabaseUsername $ActiveDatabaseUsername ActiveDatabasePassword $ActiveDatabasePassword
+        echo InActiveDatabaseUrl $InActiveDatabaseUrl InActiveDatabaseUsername $InActiveDatabaseUsername InActiveDatabasePassword $InActiveDatabasePassword
