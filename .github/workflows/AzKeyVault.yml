@@ -33,8 +33,23 @@ jobs:
           echo "${{ steps.test1.outputs.ActiveDatabasePassword }}"
           echo "${{ steps.test1.outputs.InActiveDatabaseUrl }}"
           echo "${{ steps.test1.outputs.InActiveDatabaseUsername }}"
-          echo "${{ steps.test1.outputs.InActiveDatabaseUsername }}"
+          echo "${{ steps.test1.outputs.InActiveDatabasePassword }}"
     - name: Swapping KeyVault Secrets
       run: |
         az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-url" --value "${{ steps.test1.outputs.InActiveDatabaseUrl }}"
-        az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
+        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-username" --value "${{ steps.test1.outputs.InActiveDatabaseUsername }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "Active-database-password" --value "${{ steps.test1.outputs.InActiveDatabasePassword }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-url" --value "${{ steps.test1.outputs.ActiveDatabaseUrl }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-username" --value "${{ steps.test1.outputs.ActiveDatabaseUsername }}"
+        az keyvault secret set --vault-name "parteyKeyVault" --name "InActive-database-password" --value "${{ steps.test1.outputs.ActiveDatabasePassword }}"
+    - name: Print KeyVault Secrets After Swapping Values
+      run: |
+        echo ActiveDatabaseUrl=$(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo ActiveDatabaseUsername=$(az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo ActiveDatabasePassword=$(az keyvault secret show --name "Active-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv)
+
+        echo InActiveDatabaseUrl=$(az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo InActiveDatabaseUsername=$(az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo InActiveDatabasePassword=$(az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv)
+
+        
