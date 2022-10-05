@@ -6,12 +6,13 @@ jobs:
 
   build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-    
+    steps:    
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}  
-    - run: |
+    - name: Test1
+      id: test1
+      run: |
         testVar=$(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
         echo "::set-output name=h::$testVar"
         echo ActiveDatabaseUrl value = $(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
@@ -21,6 +22,8 @@ jobs:
         echo InActiveDatabaseUrl value = $(az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
         echo InActiveDatabaseUsername value = $(az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv)
         echo InActiveDatabasePassword value = $(az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv)
-
+    - name: Test2
+      run: |
+          echo "${{ steps.test1.outputs.h }}"
         
         
