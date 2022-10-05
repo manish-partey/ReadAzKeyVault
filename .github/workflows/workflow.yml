@@ -9,8 +9,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
       env:
-        RUNNER_CONTEXT: ${{ az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv }}
-      run: |
-        echo "$RUNNER_CONTEXT"
+        RUNNER_CONTEXT: ${{ az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv }}      
+          echo "$RUNNER_CONTEXT"
     
         
