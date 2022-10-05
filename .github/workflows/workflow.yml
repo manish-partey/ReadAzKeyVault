@@ -15,5 +15,7 @@ jobs:
       id: myGetSecretAction
       env:          
           TF_VAR_MyFirstSecret: ${{ steps.myGetSecretAction.outputs.Active-database-url }}
-          
+    - name: checkValue
+      run: |          
+        echo process.env.TF_VAR_MyFirstSecret
         
