@@ -13,13 +13,13 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-        echo ActiveDatabaseUrl value = az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
-        echo ActiveDatabaseUsername value = az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv
-        echo ActiveDatabasePassword value = az keyvault secret show --name "Active-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv
+        echo ActiveDatabaseUrl value = $(az keyvault secret show --name "Active-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo ActiveDatabaseUsername value = $(az keyvault secret show --name "Active-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv)
+        echo ActiveDatabasePassword value  az keyvault secret show --name "Active-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv
 
-        echo InActiveDatabaseUrl value = az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
-        echo InActiveDatabaseUsername value = az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv
-        echo InActiveDatabasePassword value = az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv
+        echo InActiveDatabaseUrl value  az keyvault secret show --name "InActive-database-url" --vault-name "parteyKeyVault" --query "value" --output tsv
+        echo InActiveDatabaseUsername value  az keyvault secret show --name "InActive-database-username" --vault-name "parteyKeyVault" --query "value" --output tsv
+        echo InActiveDatabasePassword value  az keyvault secret show --name "InActive-database-password" --vault-name "parteyKeyVault" --query "value" --output tsv
 
         
         
